@@ -2,10 +2,10 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PRTS: Strategic Deployment</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -63,14 +63,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="status-options">
                     <label class="toggle-label"><input type="checkbox" id="owned-only-check" checked> 所持済み限定</label>
-                    <div class="btn-group">
+                    <div class="btn-group-main">
                         <button id="generate-btn" class="main-generate-btn">作戦開始</button>
                         <button id="share-btn" class="share-btn">画像保存＆X共有</button>
                     </div>
                 </div>
             </div>
+            
             <div id="squad-display" class="results-layout"></div>
             <a id="download-link" style="display:none;"></a>
         </div>

@@ -11,7 +11,7 @@ const STORAGE_KEY = 'arknights_owned_v1';
 let ownedIds = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 let currentManageRarity = "6";
 let currentManageClass = "all";
-let currentSquad = []; // 共有・画像化用
+let currentSquad = [];
 
 // タブ切り替え
 document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -27,19 +27,16 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
 function createCard(op) {
     const rarityNum = parseInt(op.rarity.replace(/[^0-9]/g, '').charAt(0)) || 1;
     const charId = String(op.id).toLowerCase().trim();
-    const fName = factionNamesMap[(op.faction||"").replace('n_', '').toLowerCase()] || op.faction || "不明";
     const div = document.createElement('div');
     div.className = `operator-card rarity-${rarityNum}`;
     div.innerHTML = `
         <div class="icon-container"><img src="./img/${charId}.png" class="op-icon" onerror="this.src='https://via.placeholder.com/100/333/fff?text=No+Img'"></div>
-        <div class="rarity-stars">${'★'.repeat(rarityNum)}</div>
         <div class="name">${op.name}</div>
-        <div><span class="info-tag">${op.class}</span><span class="info-tag">${fName}</span></div>
     `;
     return div;
 }
 
-// 管理リストの描画
+// 管理リスト描画
 function renderManageList() {
     const list = document.getElementById('operator-list');
     list.innerHTML = '';
@@ -99,43 +96,35 @@ function generate() {
     squad.forEach(op => display.appendChild(createCard(op)));
 }
 
-// 【URL追加版】画像保存＆名前・URL入りでX共有
-document.getElementById('share-btn').onclick = async () => {
+// 【画像保存＆X共有】
+document.getElementById('share-btn').onclick = async function() {
     const target = document.getElementById('squad-display');
     if (currentSquad.length === 0) return alert("先に編成を生成してください");
 
+    const btn = this;
+    btn.disabled = true;
+    btn.innerText = "生成中...";
+
     try {
-        // 1. 画像化
-        const canvas = await html2canvas(target, { 
-            backgroundColor: "#121212", 
-            scale: 2, 
-            useCORS: true 
-        });
+        const canvas = await html2canvas(target, { backgroundColor: "#121212", scale: 2, useCORS: true });
         const imgData = canvas.toDataURL("image/png");
         
-        // 2. 画像保存
         const link = document.getElementById('download-link');
         link.href = imgData;
-        link.download = `PRTS_Squad_${Date.now()}.png`;
+        link.download = `PRTS_Squad.png`;
         link.click();
 
-        // 3. X投稿用テキスト（URLを追加）
         const opNames = currentSquad.map(op => op.name).join('、');
-        // window.location.href を使うことで、現在のページのURLを自動で取得します
-        const currentUrl = window.location.href; 
-        
-        const tweetText = `【PRTS:拠点防衛編成】\n今回の防衛メンバー：\n${opNames}\n\n▼編成を生成する\n${currentUrl}\n#アークナイツ #PRTS編成生成`;
-        
+        const currentUrl = window.location.origin + window.location.pathname;
+        const tweetText = `【PRTS:拠点防衛編成】\nメンバー：${opNames}\n\n▼編成を生成する\n${currentUrl}\n#アークナイツ #PRTS編成生成`;
         const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
         
-        setTimeout(() => { 
-            window.open(tweetUrl, '_blank'); 
-        }, 1000);
-
-        alert("画像を保存しました。\nXの投稿画面でこの画像を貼り付けてシェアしてください！");
-        
-    } catch (e) { 
-        alert("画像生成に失敗しました"); 
+        window.open(tweetUrl, '_blank');
+        setTimeout(() => alert("画像が保存されました。Xに貼り付けてください！"), 500);
+    } catch (e) { alert("画像生成に失敗しました"); }
+    finally {
+        btn.disabled = false;
+        btn.innerText = "画像保存＆X共有";
     }
 };
 

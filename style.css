@@ -1,67 +1,55 @@
-/* ベーススタイル */
+/* ベース */
 body { background-color: #121212; color: #fff; font-family: sans-serif; text-align: center; padding: 0; margin: 0; }
 .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
-/* ページ切り替え */
-.page { display: none; }
-.page.active { display: block; animation: fadeIn 0.2s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-/* ナビゲーション */
+/* ナビ */
 .main-nav { display: flex; background: #222; margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #444; }
 .nav-btn { flex: 1; padding: 15px; border: none; background: transparent; color: #888; cursor: pointer; font-size: 1rem; font-weight: bold; }
 .nav-btn.active { background: #007bff; color: #fff; }
 
-/* 設定パネル */
-.deployment-settings { background: #1e1e1e; padding: 15px; border-radius: 8px; border: 1px solid #333; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+/* ページ制御 */
+.page { display: none; }
+.page.active { display: block; }
+
+/* 設定エリア */
+.deployment-settings { background: #1e1e1e; padding: 15px; border-radius: 8px; border: 1px solid #333; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
 .total-config { flex: 0 0 100px; border-right: 1px solid #444; padding-right: 15px; }
 .huge-input { width: 70px; height: 50px; font-size: 1.8rem; text-align: center; background: #000; color: #00ffcc; border: 2px solid #007bff; border-radius: 6px; }
 
-/* クラス入力（横2列） */
 .class-config { flex: 1; min-width: 280px; }
-.section-label { display: block; font-size: 0.8rem; color: #888; margin-bottom: 8px; text-align: left; }
 .class-input-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .input-item { display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; padding: 5px 12px; border-radius: 4px; font-size: 0.9rem; }
 .class-input { width: 45px; height: 30px; text-align: center; background: #000; color: #fff; border: 1px solid #555; border-radius: 4px; }
 
+/* ボタンエリア */
 .status-options { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #333; }
-.btn-group { display: flex; gap: 8px; }
+.btn-group-main { display: flex; gap: 8px; }
 
-/* 編成結果エリア（PC: 6列） */
-.results-layout { 
-    display: grid; 
-    grid-template-columns: repeat(6, 1fr); 
-    gap: 10px; 
-    margin-top: 25px; 
-    padding: 15px;
-    background-color: #121212;
-    border-radius: 8px;
-}
-
-/* カードデザイン */
-.operator-card { background: #1a1a1a; border: 1px solid #333; border-radius: 4px; padding: 6px; display: flex; flex-direction: column; align-items: center; border-left: 4px solid #333; }
+/* 生成結果 */
+.results-layout { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 25px; padding: 15px; background: #121212; border-radius: 8px; }
+.operator-card { background: #1a1a1a; border: 1px solid #333; border-radius: 4px; padding: 6px; border-left: 4px solid #333; }
 .icon-container { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #000; margin-bottom: 4px; }
 .op-icon { width: 100%; height: 100%; object-fit: cover; }
-.rarity-stars { color: #ffcf00; font-size: 0.6rem; margin-bottom: 2px; }
-.name { font-size: 0.8rem; font-weight: bold; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.info-tag { background: #333; font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; color: #bbb; margin: 1px; }
+.name { font-size: 0.8rem; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* レアリティカラー */
+/* レアリティ色 */
 .rarity-6 { border-left-color: #ffcf00; }
 .rarity-5 { border-left-color: #e0e0e0; }
 .rarity-4 { border-left-color: #c288ff; }
 .rarity-3 { border-left-color: #00b0ff; }
 
-/* ボタンデザイン */
+/* ボタン */
 .main-generate-btn { padding: 10px 20px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
 .share-btn { padding: 10px 20px; background: #000; color: #fff; border: 1px solid #555; border-radius: 4px; cursor: pointer; font-weight: bold; }
 
-/* スマホ対応（4列 & 小型化） */
+/* ★スマホ対応レスポンシブ★ */
 @media (max-width: 600px) {
-    .results-layout { grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 8px; }
-    .name { font-size: 0.65rem; }
-    .info-tag { display: none; }
+    .status-options { flex-direction: column; gap: 15px; }
+    .btn-group-main { width: 100%; flex-direction: column; }
+    .main-generate-btn, .share-btn { width: 100%; padding: 15px; }
+    .results-layout { grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 5px; }
     .total-config { flex: 1 1 100%; border-right: none; border-bottom: 1px solid #444; padding-bottom: 10px; }
+    .name { font-size: 0.65rem; }
 }
 
 /* 管理画面 */
