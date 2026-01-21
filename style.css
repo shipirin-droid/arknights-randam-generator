@@ -53,8 +53,8 @@ button:hover { background: #0056b3; }
 /* グリッド表示 */
 .squad-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* 260pxから160pxに */
+    gap: 10px;
 }
 
 /* カードのデザイン */
