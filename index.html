@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRTS: Strategic Deployment</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -49,7 +50,7 @@
                         <input type="number" id="max-squad-size" value="12" min="1" max="12" class="huge-input">
                     </div>
                     <div class="class-config">
-                        <label class="section-label">職種別・確定枠指定</label>
+                        <label class="section-label">職種別・確定枠（横2列）</label>
                         <div class="class-input-grid">
                             <div class="input-item"><span>先鋒</span><input type="number" class="class-input" data-class="先鋒" value="0"></div>
                             <div class="input-item"><span>前衛</span><input type="number" class="class-input" data-class="前衛" value="0"></div>
@@ -63,11 +64,15 @@
                     </div>
                 </div>
                 <div class="status-options">
-                    <label class="toggle-label"><input type="checkbox" id="owned-only-check" checked> 所持済みのみ抽出</label>
-                    <button id="generate-btn" class="main-generate-btn">作戦開始</button>
+                    <label class="toggle-label"><input type="checkbox" id="owned-only-check" checked> 所持済み限定</label>
+                    <div class="btn-group">
+                        <button id="generate-btn" class="main-generate-btn">作戦開始</button>
+                        <button id="share-btn" class="share-btn">画像保存＆X共有</button>
+                    </div>
                 </div>
             </div>
-            <div id="squad-display" class="squad-grid results-layout"></div>
+            <div id="squad-display" class="results-layout"></div>
+            <a id="download-link" style="display:none;"></a>
         </div>
 
         <div id="manage-page" class="page">
