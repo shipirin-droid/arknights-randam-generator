@@ -2,7 +2,7 @@
 自分専用の所持キャラ管理＆ランダム編成ツールです。
 
 ### 使い方
-- [公開ページはこちら](https://shipirin-droid.github.io/arknights-randam-generator/)
+- [公開ページはこちら](https://noza0677.github.io/arknights-randam-generator/)
 - 「所持キャラ管理」タブから自分の手持ちを登録してください。
 - レアリティ制限や職種制限をかけて、自由に編成を楽しめます。
 
